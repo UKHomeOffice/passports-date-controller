@@ -1,0 +1,40 @@
+{
+  "name": "hmpo-date-controller",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm run cover && npm run check-coverage",
+    "unit": "mocha --recursive test/spec/ --require test/helpers --timeout 300000",
+    "cover": "istanbul cover _mocha -- --recursive test/spec/ --require test/helpers --timeout 300000",
+    "check-coverage": "istanbul check-coverage --statement 100 --branch 100 --function 100 --line 100",
+    "lint": "eslint ./lib/ ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UKHomeOffice/passports-date-controller.git"
+  },
+  "author": "Daniel A.C. Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UKHomeOffice/passports-date-controller/issues"
+  },
+  "homepage": "https://github.com/UKHomeOffice/passports-date-controller",
+  "dependencies": {
+    "hmpo-form-wizard": "^4.3.0",
+    "moment": "^2.9.0",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "eslint": "^0.14.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.1.0",
+    "reqres": "^1.1.1",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0"
+  },
+  "pre-commit": [
+    "test"
+  ]
+}
