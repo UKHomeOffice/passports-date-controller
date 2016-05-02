@@ -32,13 +32,7 @@ Main Benefits
 Quality Assurance
 -----------------
 
-In order to demonstrate that this controller provides the same
-funcionality as its parents without regressions, the parents'
-([hmpo-form-wizard]'s controller and [hmpo-form-controller] itself)
-tests are run against it.
-
-The new functionality is fully documented in the controller's own unit
-test.
+The controller's functionality is fully documented in the unit test.
 
 Whilst this is the first version of this module the code coverage is
 100% as measured by [Istanbul]. This is tested for in CI to ensure new
