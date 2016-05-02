@@ -1,7 +1,7 @@
 {
   "name": "hmpo-date-controller",
   "version": "0.0.1",
-  "description": "",
+  "description": "A controller for the hmpo-form-wizard that provides out-of-the-box support for hmpo-template-mixins' 'input-date' mixin.",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run cover && npm run check-coverage",
