@@ -9,9 +9,9 @@ support for [hmpo-template-mixins]' 'input-date' mixin. It is a drop-in
 replacement for the standard controller and, if need be, can be
 inherited from in your custom controllers.
 
-My hope is that in the future this functionality will be merged into
-[hmpo-form-controller] as that already seems to have some knowledge of
-the date component fields provided by input-date.
+The functionality in this module could, at some point, be merged into
+[hmpo-form-controller] as that already has knowledge of the date
+component fields provided by input-date.
 
 Main Benefits
 -------------
