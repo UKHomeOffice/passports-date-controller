@@ -28,6 +28,7 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "eslint": "^0.14.1",
+    "hmpo-model": "^0.4.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.1.0",
     "reqres": "^1.1.1",
