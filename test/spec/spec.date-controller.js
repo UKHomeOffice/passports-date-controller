@@ -70,15 +70,15 @@ describe('Date Controller', function () {
                 });
 
                 it('applies the \'date-year\' validator to the year component', function () {
-                    options.fields[key + '-year'].validate.should.contain['date-year'];
+                    options.fields[key + '-year'].validate.should.contain('date-year');
                 });
 
                 it('applies the \'date-month\' validator to the month component', function () {
-                    options.fields[key + '-month'].validate.should.contain['date-month'];
+                    options.fields[key + '-month'].validate.should.contain('date-month');
                 });
 
                 it('applies the \'date-day\' validator to the day component', function () {
-                    options.fields[key + '-day'].validate.should.contain['date-day'];
+                    options.fields[key + '-day'].validate.should.contain('date-day');
                 });
 
                 it('does NOT apply the \'required\' validator to the component fields', function () {
@@ -123,6 +123,12 @@ describe('Date Controller', function () {
                     should.not.exist(req.form.values[key + '-month']);
                     should.not.exist(req.form.values[key + '-day']);
                 });
+
+                it('does NOT apply the date validators to the date components', function () {
+                    should.not.exist(options.fields[key + '-year']);
+                    should.not.exist(options.fields[key + '-month']);
+                    should.not.exist(options.fields[key + '-day']);
+                });
             });
 
             describe('when an input-date is submitted for the field with a missing month component', function () {
@@ -139,6 +145,12 @@ describe('Date Controller', function () {
                     should.not.exist(req.form.values[key + '-year']);
                     should.not.exist(req.form.values[key + '-month']);
                     should.not.exist(req.form.values[key + '-day']);
+                });
+
+                it('does NOT apply the date validators to the date components', function () {
+                    should.not.exist(options.fields[key + '-year']);
+                    should.not.exist(options.fields[key + '-month']);
+                    should.not.exist(options.fields[key + '-day']);
                 });
             });
 
@@ -157,6 +169,12 @@ describe('Date Controller', function () {
                     should.not.exist(req.form.values[key + '-month']);
                     should.not.exist(req.form.values[key + '-day']);
                 });
+
+                it('does NOT apply the date validators to the date components', function () {
+                    should.not.exist(options.fields[key + '-year']);
+                    should.not.exist(options.fields[key + '-month']);
+                    should.not.exist(options.fields[key + '-day']);
+                });
             });
 
             describe('when an input-date is submitted for the field with an empty year component', function () {
@@ -171,6 +189,12 @@ describe('Date Controller', function () {
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
                     req.form.values[key + '-formatted'].should.eql('');
+                });
+
+                it('applies the date validators to the date components', function () {
+                    options.fields[key + '-year'].validate.should.contain('date-year');
+                    options.fields[key + '-month'].validate.should.contain('date-month');
+                    options.fields[key + '-day'].validate.should.contain('date-day');
                 });
             });
 
@@ -187,6 +211,12 @@ describe('Date Controller', function () {
                     req.form.values[key].should.eql('');
                     req.form.values[key + '-formatted'].should.eql('');
                 });
+
+                it('applies the date validators to the date components', function () {
+                    options.fields[key + '-year'].validate.should.contain('date-year');
+                    options.fields[key + '-month'].validate.should.contain('date-month');
+                    options.fields[key + '-day'].validate.should.contain('date-day');
+                });
             });
 
             describe('when an input-date is submitted for the field with an empty day component', function () {
@@ -201,6 +231,33 @@ describe('Date Controller', function () {
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
                     req.form.values[key + '-formatted'].should.eql('');
+                });
+
+                it('applies the date validators to the date components', function () {
+                    options.fields[key + '-year'].validate.should.contain('date-year');
+                    options.fields[key + '-month'].validate.should.contain('date-month');
+                    options.fields[key + '-day'].validate.should.contain('date-day');
+                });
+            });
+
+            describe('when an input-date is submitted for the field with only empty date components', function () {
+                beforeEach(function () {
+                    req.body[key + '-year'] = '';
+                    req.body[key + '-month'] = '';
+                    req.body[key + '-day'] = '';
+
+                    form._process(req, res, cb);
+                });
+
+                it('processes to an empty string', function () {
+                    req.form.values[key].should.eql('');
+                    req.form.values[key + '-formatted'].should.eql('');
+                });
+
+                it('does NOT apply the date validators to the date components', function () {
+                    options.fields[key + '-year'].validate.should.not.contain('date-year');
+                    options.fields[key + '-month'].validate.should.not.contain('date-month');
+                    options.fields[key + '-day'].validate.should.not.contain('date-day');
                 });
             });
 
@@ -268,6 +325,33 @@ describe('Date Controller', function () {
                     options.fields[key + '-year'].validate.should.contain('required');
                     options.fields[key + '-month'].validate.should.contain('required');
                     options.fields[key + '-day'].validate.should.contain('required');
+                });
+            });
+
+            describe('when an input-date is submitted for the field with only empty date components', function () {
+                beforeEach(function () {
+                    req.body[key + '-year'] = '';
+                    req.body[key + '-month'] = '';
+                    req.body[key + '-day'] = '';
+
+                    form._process(req, res, cb);
+                });
+
+                it('processes to an empty string', function () {
+                    req.form.values[key].should.eql('');
+                    req.form.values[key + '-formatted'].should.eql('');
+                });
+
+                it('applies the \'required\' validator to the component fields', function () {
+                    options.fields[key + '-year'].validate.should.contain('required');
+                    options.fields[key + '-month'].validate.should.contain('required');
+                    options.fields[key + '-day'].validate.should.contain('required');
+                });
+
+                it('does NOT apply the date validators to the date components', function () {
+                    options.fields[key + '-year'].validate.should.not.contain('date-year');
+                    options.fields[key + '-month'].validate.should.not.contain('date-month');
+                    options.fields[key + '-day'].validate.should.not.contain('date-day');
                 });
             });
         });
