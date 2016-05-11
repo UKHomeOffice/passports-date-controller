@@ -10,6 +10,7 @@ describe('Date Controller', function () {
     beforeEach(function () {
         sinon.spy(EventEmitter.prototype, 'emit');
     });
+
     afterEach(function () {
         EventEmitter.prototype.emit.restore();
     });
@@ -65,10 +66,6 @@ describe('Date Controller', function () {
                     req.form.values[key].should.eql('1999-12-01');
                 });
 
-                it('processes fields from the input-date mixin into a single, formatted field', function () {
-                    req.form.values[key + '-formatted'].should.eql('1 December 1999');
-                });
-
                 it('applies the \'date-year\' validator to the year component', function () {
                     options.fields[key + '-year'].validate.should.contain('date-year');
                 });
@@ -101,7 +98,6 @@ describe('Date Controller', function () {
 
                 it('does NOT process the unexpected field', function () {
                     should.not.exist(req.form.values[otherKey]);
-                    should.not.exist(req.form.values[otherKey + '-formatted']);
                     should.not.exist(req.form.values[otherKey + '-year']);
                     should.not.exist(req.form.values[otherKey + '-month']);
                     should.not.exist(req.form.values[otherKey + '-day']);
@@ -118,7 +114,6 @@ describe('Date Controller', function () {
 
                 it('does NOT process it as an input-date field', function () {
                     req.form.values[key].should.eql('');
-                    should.not.exist(req.form.values[key + '-formatted']);
                     should.not.exist(req.form.values[key + '-year']);
                     should.not.exist(req.form.values[key + '-month']);
                     should.not.exist(req.form.values[key + '-day']);
@@ -141,7 +136,6 @@ describe('Date Controller', function () {
 
                 it('does NOT process it as an input-date field', function () {
                     req.form.values[key].should.eql('');
-                    should.not.exist(req.form.values[key + '-formatted']);
                     should.not.exist(req.form.values[key + '-year']);
                     should.not.exist(req.form.values[key + '-month']);
                     should.not.exist(req.form.values[key + '-day']);
@@ -164,7 +158,6 @@ describe('Date Controller', function () {
 
                 it('does NOT process it as an input-date field', function () {
                     req.form.values[key].should.eql('');
-                    should.not.exist(req.form.values[key + '-formatted']);
                     should.not.exist(req.form.values[key + '-year']);
                     should.not.exist(req.form.values[key + '-month']);
                     should.not.exist(req.form.values[key + '-day']);
@@ -188,7 +181,6 @@ describe('Date Controller', function () {
 
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
-                    req.form.values[key + '-formatted'].should.eql('');
                 });
 
                 it('applies the date validators to the date components', function () {
@@ -209,7 +201,6 @@ describe('Date Controller', function () {
 
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
-                    req.form.values[key + '-formatted'].should.eql('');
                 });
 
                 it('applies the date validators to the date components', function () {
@@ -230,7 +221,6 @@ describe('Date Controller', function () {
 
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
-                    req.form.values[key + '-formatted'].should.eql('');
                 });
 
                 it('applies the date validators to the date components', function () {
@@ -251,7 +241,6 @@ describe('Date Controller', function () {
 
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
-                    req.form.values[key + '-formatted'].should.eql('');
                 });
 
                 it('does NOT apply the date validators to the date components', function () {
@@ -272,7 +261,6 @@ describe('Date Controller', function () {
 
                 it('pads the month component to two characters in the combined field', function () {
                     req.form.values[key].should.eql('1999-02-01');
-                    req.form.values[key + '-formatted'].should.eql('1 February 1999');
                 });
             });
 
@@ -287,7 +275,6 @@ describe('Date Controller', function () {
 
                 it('pads the day component to two characters in the combined field', function () {
                     req.form.values[key].should.eql('1999-02-01');
-                    req.form.values[key + '-formatted'].should.eql('1 February 1999');
                 });
             });
         });
@@ -339,7 +326,6 @@ describe('Date Controller', function () {
 
                 it('processes to an empty string', function () {
                     req.form.values[key].should.eql('');
-                    req.form.values[key + '-formatted'].should.eql('');
                 });
 
                 it('applies the \'required\' validator to the component fields', function () {
