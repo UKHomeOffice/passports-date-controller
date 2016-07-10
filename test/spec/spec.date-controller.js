@@ -30,14 +30,13 @@ describe('Date Controller', function () {
     });
 
     describe('process', function () {
-
         var form, handler, req, res, cb, options, key;
 
-        describe('when a field is expected but not required', function () {
+        describe('when an input-date field is expected but not required', function () {
             beforeEach(function () {
                 key = 'date-field';
                 options = { template: 'index', fields: {} };
-                options.fields[key] = {}
+                options.fields[key] = { validate: ['input-date'] }
                 form = new DateController(options);
                 sinon.stub(form, 'get').yields();
                 sinon.stub(form, 'post').yields();
@@ -279,11 +278,11 @@ describe('Date Controller', function () {
             });
         });
 
-        describe('when a field is expected and required', function () {
+        describe('when an input-date field is expected and required', function () {
             beforeEach(function () {
                 key = 'date-field';
                 options = { template: 'index', fields: {} };
-                options.fields[key] = { validate: ['required'] }
+                options.fields[key] = { validate: ['required', 'input-date'] }
                 form = new DateController(options);
                 sinon.stub(form, 'get').yields();
                 sinon.stub(form, 'post').yields();
@@ -338,6 +337,44 @@ describe('Date Controller', function () {
                     options.fields[key + '-year'].validate.should.not.contain('date-year');
                     options.fields[key + '-month'].validate.should.not.contain('date-month');
                     options.fields[key + '-day'].validate.should.not.contain('date-day');
+                });
+            });
+        });
+
+        describe('when an input-date field is not expected', function () {
+            beforeEach(function () {
+                key = 'date-field';
+                options = { template: 'index', fields: {} };
+                options.fields[key] = { validate: [] }
+                form = new DateController(options);
+                sinon.stub(form, 'get').yields();
+                sinon.stub(form, 'post').yields();
+                // use a spy instead of a stub so that the length is unaffected
+                sinon.spy(form, 'errorHandler');
+                req = request({
+                    url: '/test',
+                    params: {}
+                }),
+                res = {
+                    send: sinon.stub()
+                };
+                cb = function callback() {};
+            });
+
+            describe('when an input-date is submitted for the field with valid data', function () {
+                beforeEach(function () {
+                    req.body[key + '-year'] = '1999';
+                    req.body[key + '-month'] = '12';
+                    req.body[key + '-day'] = '01';
+
+                    form._process(req, res, cb);
+                });
+
+                it('does NOT process the field as an input-date', function () {
+                    req.form.values[key].should.eql('');
+                    should.not.exist(req.form.values[key + '-year']);
+                    should.not.exist(req.form.values[key + '-month']);
+                    should.not.exist(req.form.values[key + '-day']);
                 });
             });
         });
