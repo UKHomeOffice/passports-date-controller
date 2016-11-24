@@ -21,16 +21,16 @@
   },
   "homepage": "https://github.com/UKHomeOffice/passports-date-controller",
   "dependencies": {
-    "hmpo-form-wizard": "^4.3.0",
+    "hmpo-form-wizard": "^5.2.0",
     "moment": "^2.9.0",
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
-    "eslint": "^0.14.1",
-    "hmpo-model": "^0.4.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.10.2",
+    "hmpo-model": "^0.7.0",
     "istanbul": "^0.4.3",
-    "mocha": "^2.1.0",
+    "mocha": "^3.1.2",
     "pre-commit": "^1.1.2",
     "reqres": "^1.1.1",
     "sinon": "^1.12.2",
